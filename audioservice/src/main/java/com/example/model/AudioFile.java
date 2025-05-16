@@ -1,20 +1,23 @@
-package audioservice.src.main.java.com.example.audioservice.model;
+package com.example.model;
 
 import lombok.Data;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
 
 @Data
 @Builder
-@Getter
-@Setter
 public class AudioFile {
+    private Long Id;
     private String title;
     private String artist;
     private String album;
     private int durationSec;
     private int bitrateKbps;
     private String resourceId;
+    private LocalDateTime uploadDate;
+
 }
-}
+
