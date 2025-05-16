@@ -4,23 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c6f68ec-8dc0-4716-80da-3d4acf6c76c8" name="Changes" comment="Этап 2. Подключена бд">
-      <change afterPath="$PROJECT_DIR$/audioservice/audio-service.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/audioservice/src/main/java/com/example/client/ResourceServiceClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/audioservice/src/main/java/com/example/controller/AudioFileController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/audioservice/src/main/java/com/example/repository/AudioFileRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/audioservice/src/main/java/com/example/response/AudioFileResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/audioservice/src/main/java/com/example/service/AudioFileService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ProjectAudio.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="4c6f68ec-8dc0-4716-80da-3d4acf6c76c8" name="Changes" comment="Реализация REST-интерфейса Audio Service">
+      <change afterPath="$PROJECT_DIR$/audioservice/src/main/java/com/example/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audioservice/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/audioservice/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audioservice/src/main/java/com/example/audioservice/model/AudioFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/audioservice/src/main/java/com/example/model/AudioFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/audioservice/src/main/java/com/example/audioservice/service/MP3MetadataParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/audioservice/src/main/java/com/example/service/MP3MetadataParser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="feature-3" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -73,7 +59,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "feature-3",
+    "git-widget-placeholder": "feature-4",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/alexu/IdeaProjects/be-java-advice-audit-service/resourceservice",
@@ -114,6 +100,7 @@
       <workItem from="1747237812280" duration="9216000" />
       <workItem from="1747298548057" duration="6552000" />
       <workItem from="1747395738736" duration="9302000" />
+      <workItem from="1747423970667" duration="1298000" />
     </task>
     <task id="LOCAL-00001" summary="Этап 1. Инициализирован первый сервис">
       <option name="closed" value="true" />
@@ -147,7 +134,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747249358432</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Реализация REST-интерфейса Audio Service">
+      <option name="closed" value="true" />
+      <created>1747424085670</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1747424085670</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -181,6 +176,7 @@
     <MESSAGE value="Этап 1. Инициализирован первый сервис и второй" />
     <MESSAGE value="Этап 1. Инициализирован первый сервис, удален второй" />
     <MESSAGE value="Этап 2. Подключена бд" />
-    <option name="LAST_COMMIT_MESSAGE" value="Этап 2. Подключена бд" />
+    <MESSAGE value="Реализация REST-интерфейса Audio Service" />
+    <option name="LAST_COMMIT_MESSAGE" value="Реализация REST-интерфейса Audio Service" />
   </component>
 </project>
