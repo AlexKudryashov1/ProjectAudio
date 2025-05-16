@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: audio_admin
+      POSTGRES_PASSWORD: securepass
+      POSTGRES_DB: audio_service_db
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - audio-network
+
+  resource-service:
+    build:
+      context: ./resource-service
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/audio_service_db
+      SPRING_DATASOURCE_USERNAME: audio_admin
+      SPRING_DATASOURCE_PASSWORD: securepass
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres
+    networks:
+      - audio-network
+
+  audio-service:
+    build:
+      context: ./audio-service
+      dockerfile: Dockerfile
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/audio_service_db
+      SPRING_DATASOURCE_USERNAME: audio_admin
+      SPRING_DATASOURCE_PASSWORD: securepass
+      RESOURCE_SERVICE_URL: http://resource-service:8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - resource-service
+    networks:
+      - audio-network
+
+volumes:
+  pg_data:
+
+networks:
+  audio-network:
+    driver: bridge

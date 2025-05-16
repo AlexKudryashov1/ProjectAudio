@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c6f68ec-8dc0-4716-80da-3d4acf6c76c8" name="Changes" comment="Этап 2. Подключена бд">
-      <change afterPath="$PROJECT_DIR$/audioservice/src/main/java/com/example/audioservice/model/AudioFile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/audioservice/src/main/java/com/example/audioservice/service/MP3MetadataParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/audioservice/src/main/resources/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/audioservice/pom.xml" afterDir="false" />
+    <list default="true" id="4c6f68ec-8dc0-4716-80da-3d4acf6c76c8" name="Changes" comment="Реализация REST-интерфейса Audio Service">
+      <change afterPath="$PROJECT_DIR$/audioservice/src/main/java/com/example/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +16,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -26,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature-1" />
+        <entry key="$PROJECT_DIR$" value="feature-3" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -59,8 +57,9 @@
     "Repository.Attach.JavaDocs": "false",
     "Repository.Attach.Sources": "false",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "git-widget-placeholder": "feature-2",
+    "git-widget-placeholder": "feature-4",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/alexu/IdeaProjects/be-java-advice-audit-service/resourceservice",
@@ -69,6 +68,9 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -82,6 +84,8 @@
       <recent name="C:\Users\alexu\IdeaProjects\be-java-advice-audit-service\ProjectAudio" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\alexu\IdeaProjects\ProjectAudio\audioservice" />
+      <recent name="C:\Users\alexu\IdeaProjects\ProjectAudio" />
       <recent name="C:\Users\alexu\IdeaProjects\be-java-advice-audit-service\ProjectAudio\audioservice" />
     </key>
   </component>
@@ -95,6 +99,8 @@
       <updated>1747237811074</updated>
       <workItem from="1747237812280" duration="9216000" />
       <workItem from="1747298548057" duration="6552000" />
+      <workItem from="1747395738736" duration="9302000" />
+      <workItem from="1747423970667" duration="1298000" />
     </task>
     <task id="LOCAL-00001" summary="Этап 1. Инициализирован первый сервис">
       <option name="closed" value="true" />
@@ -128,7 +134,15 @@
       <option name="project" value="LOCAL" />
       <updated>1747249358432</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Реализация REST-интерфейса Audio Service">
+      <option name="closed" value="true" />
+      <created>1747424085670</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1747424085670</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,6 +176,7 @@
     <MESSAGE value="Этап 1. Инициализирован первый сервис и второй" />
     <MESSAGE value="Этап 1. Инициализирован первый сервис, удален второй" />
     <MESSAGE value="Этап 2. Подключена бд" />
-    <option name="LAST_COMMIT_MESSAGE" value="Этап 2. Подключена бд" />
+    <MESSAGE value="Реализация REST-интерфейса Audio Service" />
+    <option name="LAST_COMMIT_MESSAGE" value="Реализация REST-интерфейса Audio Service" />
   </component>
 </project>
