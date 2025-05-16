@@ -5,14 +5,12 @@
                              https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Базовые настройки проекта -->
     <groupId>com.example</groupId>
-    <artifactId>resource-service</artifactId>
+    <artifactId>audio-service</artifactId>
     <version>1.0.0</version>
-    <name>Resource Service</name>
-    <description>Service for storing binary files</description>
+    <name>Audio Service</name>
+    <description>Service for processing MP3 files</description>
 
-    <!-- Родительский Spring Boot -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -25,13 +23,11 @@
     </properties>
 
     <dependencies>
-        <!-- Spring Boot Web (REST API) -->
+        <!-- Общие зависимости (как в Resource Service) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
-        <!-- Spring Data JPA + PostgreSQL -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -42,14 +38,27 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- Lombok (опционально) -->
+        <!-- Уникальные зависимости для Audio Service -->
+        <!-- 1. Парсинг MP3 -->
+        <dependency>
+            <groupId>org</groupId>
+            <artifactId>jaudiotagger</artifactId>
+            <version>2.2.3</version>
+        </dependency>
+
+        <!-- 2. Feign Client для вызова Resource Service -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>4.0.4</version>
+        </dependency>
+
+        <!-- Lombok и тесты (аналогично Resource Service) -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
-
-        <!-- Тестирование -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -59,7 +68,6 @@
 
     <build>
         <plugins>
-            <!-- Сборка в JAR -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
