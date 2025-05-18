@@ -1,112 +1,77 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-
-    <groupId>com.example</groupId>
-    <artifactId>audio-service</artifactId>
-    <version>1.0.0</version>
-    <name>Audio Service</name>
-    <description>Service for processing MP3 files</description>
-
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.5</version>  <!-- Актуальная версия -->
-        <relativePath/>
-    </parent>
-
-    <properties>
-        <java.version>17</java.version>
-        <spring-cloud.version>2022.0.4</spring-cloud.version>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <dependencies>
-        <!-- Spring Boot Starters -->
-        <dependency>
+<build>
+    <plugins>
+        <!-- Spring Boot Maven Plugin -->
+        <plugin>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
 
-        <!-- Database -->
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+        <!-- Maven Compiler Plugin -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.11.0</version>
+            <configuration>
+                <source>${java.version}</source>
+                <target>${java.version}</target>
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>org.mapstruct</groupId>
+                        <artifactId>mapstruct-processor</artifactId>
+                        <version>${mapstruct.version}</version>
+                    </path>
+                    <path>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                        <version>${lombok.version}</version>
+                    </path>
+                    <path>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok-mapstruct-binding</artifactId>
+                        <version>0.2.0</version>
+                    </path>
+                </annotationProcessorPaths>
+            </configuration>
+        </plugin>
 
-        <dependency>
-            <groupId>org.jaudiotagger</groupId>
-            <artifactId>jaudiotagger</artifactId>
-            <version>2.2.6</version>
-        </dependency>
-
-        <!-- Feign Client -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-
-        <!-- Dev Tools -->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-
-        <!-- Testing -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
-    <repositories>
-        <repository>
-            <id>oss-sonatype</id>
-            <name>OSS Sonatype</name>
-            <url>https://oss.sonatype.org/content/repositories/releases/</url>
-        </repository>
-    </repositories>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-</project>
+        <!-- ProGuard Maven Plugin -->
+        <plugin>
+            <groupId>com.github.wvengen</groupId>
+            <artifactId>proguard-maven-plugin</artifactId>
+            <version>2.6.0</version>
+            <executions>
+                <execution>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>proguard</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <configuration>
+                <obfuscate>true</obfuscate>
+                <injar>${project.build.finalName}.jar</injar>
+                <outjar>${project.build.finalName}-small.jar</outjar>
+                <outputDirectory>${project.build.directory}</outputDirectory>
+                <proguardInclude>${basedir}/proguard.conf</proguardInclude>
+                <libs>
+                    <lib>${java.home}/lib/rt.jar</lib>
+                    <lib>${java.home}/lib/jce.jar</lib>
+                </libs>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                    </exclusion>
+                </exclusions>
+            </configuration>
+            <dependencies>
+                <dependency>
+                    <groupId>net.sf.proguard</groupId>
+                    <artifactId>proguard-base</artifactId>
+                    <version>6.2.2</version>
+                    <scope>runtime</scope>
+                </dependency>
+            </dependencies>
+        </plugin>
+    </plugins>
+</build>
