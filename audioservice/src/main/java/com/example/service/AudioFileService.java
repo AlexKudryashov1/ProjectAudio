@@ -1,13 +1,14 @@
 package com.example.service;
 
-import audioservice.src.main.java.com.example.audioservice.service.MP3MetadataParser;
+import com.example.model.AudioMetadata;
+import com.example.parser.MP3MetadataParser;
 import com.example.client.ResourceServiceClient;
+import com.example.mapper.AudioFileMapper;
 import com.example.model.AudioFile;
 import com.example.repository.AudioFileRepository;
 import com.example.response.AudioFileResponse;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,38 +23,46 @@ public class AudioFileService {
     private final AudioFileRepository audioFileRepository;
     private final ResourceServiceClient resourceServiceClient;
     private final MP3MetadataParser mp3MetadataParser;
+    private final AudioFileMapper audioFileMapper; // Внедряем маппер
 
-    public AudioFileResponse uploadAudioFile(MultipartFile file) throws IOException, UnsupportedAudioFileException {
-        // 1. Parse metadata
-        MP3MetadataParser.AudioMetadata metadata = mp3MetadataParser.parseMetadata(file.getInputStream());
+    public AudioFileResponse uploadAudioFile(MultipartFile file)
+            throws IOException, UnsupportedAudioFileException {
 
-        // 2. Upload binary to Resource Service
+        // 1. Парсим метаданные
+       AudioMetadata metadata = mp3MetadataParser.parseMetadata(file.getInputStream());
+
+        // 2. Загружаем файл в Resource Service
         UUID resourceId = UUID.fromString(resourceServiceClient.uploadResource(file));
 
-        // 3. Save metadata
-        AudioFile audioFile = AudioFile.builder()
-                .title(metadata.getTitle())
-                .artist(metadata.getArtist())
-                .album(metadata.getAlbum())
-                .durationSec(metadata.getDurationSec())
-                .bitrateKbps(metadata.getBitrateKbps())
-                .resourceId(String.valueOf(resourceId))
-                .build();
+        // 3. Сохраняем через маппер
+        AudioFile savedFile = audioFileRepository.save(
+                audioFileMapper.toEntity(metadata, resourceId)
+        );
 
-        AudioFile savedFile = audioFileRepository.save(audioFile);
-        return convertToDto(savedFile);
+        return audioFileMapper.toDto(savedFile);
+    }
+    public AudioFileResponse getAudioFile(Long id) {
+        AudioFile audioFile = audioFileRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Audio file not found with id: " + id));
+        return audioFileMapper.toDto(audioFile);
     }
 
-    private AudioFileResponse convertToDto(AudioFile audioFile) {
-        return AudioFileResponse.builder()
-                .id(audioFile.getId())
-                .title(audioFile.getTitle())
-                .artist(audioFile.getArtist())
-                .album(audioFile.getAlbum())
-                .durationSec(audioFile.getDurationSec())
-                .bitrateKbps(audioFile.getBitrateKbps())
-                .resourceId(audioFile.getResourceId())
-                .uploadDate(audioFile.getUploadDate())
-                .build();
+    public void deleteAudioFile(Long id) {
+        // 1. Получаем информацию о файле
+        AudioFile audioFile = audioFileRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Audio file not found with id: " + id));
+
+        // 2. Удаляем из хранилища
+        resourceServiceClient.deleteResource(UUID.fromString(audioFile.getResourceId()));
+
+        // 3. Удаляем запись из БД
+        audioFileRepository.deleteById(id);
+    }
+
+    public byte[] getAudioBytes(Long id) {
+        AudioFile audioFile = audioFileRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Audio file not found with id: " + id));
+
+        return resourceServiceClient.getResourceBytes(String.valueOf(UUID.fromString(audioFile.getResourceId())));
     }
 }
